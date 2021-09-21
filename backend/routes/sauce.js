@@ -16,10 +16,10 @@ router.put('/:id', auth, multer, sauceCtrl.modifySauce);
 router.delete('/:id', auth, sauceCtrl.deleteSauce);
 
 // GetAll Sauce
-router.get('/', auth, multer, sauceCtrl.getAllSauce);
+router.get('/', auth, sauceCtrl.getAllSauce);
 
 // GetOne Sauce
-router.get('/:id', auth, multer, sauceCtrl.getOneSauce);
+router.get('/:id', auth, sauceCtrl.getOneSauce);
 
 // Like Sauce
 router.post('/:id/like', auth, sauceCtrl.likeSauce);
