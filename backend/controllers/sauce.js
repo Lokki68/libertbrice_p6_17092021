@@ -78,8 +78,8 @@ exports.likeSauce = (req, res, next) => {
     const usersDisliked = sauce.usersDisliked;
 
     if (userLike == 0) {
-      const userLiked = usersLiked.find(usersId == userId);
-      const userDisliked = usersDisliked.find(usersId == userId);
+      const userLiked = usersLiked.find((usersId) => usersId == userId);
+      const userDisliked = usersDisliked.find((usersId) => usersId == userId);
 
       // si déjà Like
       if (userLiked) {
@@ -87,8 +87,14 @@ exports.likeSauce = (req, res, next) => {
           { _id: req.params.id },
           { $pull: { usersLiked: userId }, $inc: { likes: -1 } }
         )
-          .then(() => res.status(200).json({ message: 'Il aime plus' }))
-          .catch((err) => res.status(500).json({ err }));
+          .then(() => {
+            res.status(200).json({ message: 'Il aime plus' });
+            console.log('sauce Like - ');
+          })
+          .catch((err) => {
+            res.status(500).json({ err });
+            console.log(err);
+          });
 
         // si déjà Dislike
       } else if (userDisliked) {
